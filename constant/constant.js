@@ -20,4 +20,11 @@ const ERROR_MESSAGE = {
   },
 };
 
-module.exports(LOTTO_MESSAGE, ERROR_MESSAGE);
+const LOTTO = {
+  PRICE: 1_000,
+  MIN_NUMBER: 1,
+  MAX_NUMBER: 45,
+  NUMBER_COUNT: 6,
+};
+
+module.exports(LOTTO_MESSAGE, ERROR_MESSAGE, LOTTO);
