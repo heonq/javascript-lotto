@@ -1,0 +1,12 @@
+const { readLine } = require('./util');
+const { LOTTO_MESSAGE } = require('../constant/constant');
+
+class User {
+  getUserPurchaseAmount() {
+    readLine(LOTTO_MESSAGE.AMOUNT, (amount) => {
+      this.amount = amount;
+    });
+  }
+}
+
+module.exports = User;
