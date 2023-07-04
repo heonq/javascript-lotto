@@ -1,6 +1,6 @@
 const LOTTO_MESSAGE = Object.freeze({
   INPUT_AMOUNT: '구입금액을 입력해 주세요.',
-  PRINT_QTY: '개를 구매했습니다.',
+  PRINT_QUANTITY: '개를 구매했습니다.',
   INPUT_MAIN_NUMBER: '당첨 번호를 입력해 주세요.',
   INPUT_BONUS_NUMBER: '보너스 번호를 입력해 주세요.',
   PRINT_RESULT: '당첨 통계\n---',
