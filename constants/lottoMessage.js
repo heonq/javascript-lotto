@@ -4,7 +4,7 @@ const LOTTO_MESSAGE = Object.freeze({
   INPUT_MAIN_NUMBER: '당첨 번호를 입력해 주세요.',
   INPUT_BONUS_NUMBER: '보너스 번호를 입력해 주세요.',
   PRINT_RESULT: '당첨 통계\n---',
-  QTY: '개',
+  QUATITY: '개',
   THREE_SAME: '3개 일치 (5,000원) - ',
   FOUR_SAME: '4개 일치 (50,000원) - ',
   FIVE_SAME: '5개 일치 (1,500,000원) - ',
