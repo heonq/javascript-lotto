@@ -7,7 +7,8 @@ const LOTTO_MESSAGE = {
 };
 
 const ERROR_MESSAGE = {
-  AMOUNT: '[ERROR] 로또 구매 금액은 1,000원 단위로 입력해주세요.',
+  THOUSAND_UNIT: '[ERROR] 로또 구매 금액은 1,000원 단위로 입력해주세요.',
+  INPUT_NAN: '[ERROR] 숫자를 입력해주세요.',
   NOT_IN_RANGE: '[ERROR] 1부터 45 사이의 숫자를 입력해주세요.',
   DUPLICATED: '[ERROR] 중복되지 않은 6개의 숫자를 입력해주세요.',
   LENGTH: '[ERROR] 6개의 숫자를 입력해주세요.',
