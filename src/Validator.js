@@ -2,6 +2,23 @@ const { ERROR_MESSAGE, LOTTO } = require('../constant/constant');
 const { throwError } = require('./util');
 
 class Validator {
+  static validateAmount(amount) {
+    if (!Validator.validateThousandUnit(amount)) {
+      throwError(ERROR_MESSAGE.THOUSAND_UNIT);
+    }
+    if (!Validator.validateNaN(Number(amount))) {
+      throwError(ERROR_MESSAGE.INPUT_NAN);
+    }
+  }
+
+  static validateThousandUnit(amount) {
+    return amount === 0 || amount % LOTTO.PRICE !== 0;
+  }
+
+  static validateNaN(amount) {
+    return /^\d+$/.test(amount);
+  }
+
   static validateNumbers(numbers) {
     if (!Validator.validateLength(numbers)) {
       throwError(ERROR_MESSAGE.LENGTH);
@@ -14,10 +31,6 @@ class Validator {
     if (!Validator.validateNumberInRange(numbers)) {
       throwError(ERROR_MESSAGE.NOT_IN_RANGE);
     }
-  }
-
-  static checkAmount(amount) {
-    return amount === 0 || amount % LOTTO.PRICE !== 0;
   }
 
   static validateNumberInRange(MainNumber) {
@@ -35,8 +48,8 @@ class Validator {
     return MainNumber.length === 6;
   }
 
-  static validateComma(MainNumber) {
-    return MainNumber.split(',').length === 6;
+  static validateComma(originalString) {
+    return originalString.split(',').length === 6;
   }
 }
 

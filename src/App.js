@@ -1,7 +1,5 @@
 const User = require('./User');
 const Validator = require('./Validator');
-const { throwError } = require('./util');
-const { ERROR_MESSAGE } = require('../constant/constant');
 
 class App {
   constructor() {
@@ -10,7 +8,7 @@ class App {
 
   play() {
     this.purchase();
-    this.validateAmount();
+    this.validateAmount(this.amount);
   }
 
   purchase() {
@@ -18,8 +16,8 @@ class App {
     this.amount = this.user.amount;
   }
 
-  validateAmount() {
-    if (!Validator.checkAmount(this.amount)) throwError(ERROR_MESSAGE.AMOUNT);
+  validateAmount(amount) {
+    Validator.validateAmount(amount);
   }
 }
 
