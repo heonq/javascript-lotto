@@ -14,4 +14,10 @@ const LOTTO_MESSAGE = Object.freeze({
   IS: '%입니다.',
 });
 
-module.exports = { LOTTO_MESSAGE };
+const ERROR_MESSAGE = Object.freeze({
+  NOT_THOUSAND_UNIT: '1,000원 단위로 금액을 입력해주세요.',
+  LESS_THAN_THOUSAND: '1,000원 이상의 금액을 입력해주세요.',
+  NOT_NUMBER: '숫자를 입력해주세요.',
+});
+
+module.exports = { LOTTO_MESSAGE, ERROR_MESSAGE };
