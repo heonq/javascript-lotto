@@ -4,3 +4,5 @@ const LOTTO = Object.freeze({
   MAX_NUMBER: 45,
   NUMBER_COUNT: 6,
 });
+
+module.exports = { LOTTO };

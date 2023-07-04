@@ -13,3 +13,5 @@ const LOTTO_MESSAGE = Object.freeze({
   RATE_OF_RETURN: '총 수익률은 ',
   IS: '%입니다.',
 });
+
+module.exports = { LOTTO_MESSAGE };
