@@ -6,21 +6,15 @@ const Validator = require('../lib/Validator');
 class User {
   play() {
     this.purchaseLotto();
-    Validator.validatePurchaseAmount(this.amount);
-    this.getQuantity();
-    this.printQuantity();
   }
 
   purchaseLotto() {
     Console.readLine(LOTTO_MESSAGE.INPUT_AMOUNT, (amount) => {
+      Validator.validatePurchaseAmount(amount);
       this.amount = amount;
+      this.quantity = this.amount / LOTTO.PRICE;
+      Console.print(this.quantity + LOTTO_MESSAGE.PRINT_QUANTITY);
     });
-  }
-  getQuantity() {
-    this.quantity = this.amount / LOTTO.PRICE;
-  }
-  printQuantity() {
-    Console.print(this.quantity + LOTTO_MESSAGE.PRINT_QUANTITY);
   }
 }
 
