@@ -5,9 +5,7 @@ const Validator = require('../lib/Validator');
 const Lotto = require('./Lotto');
 
 class User {
-  constructor() {
-    this.#storage = [];
-  }
+  #storage = [];
 
   play() {
     this.purchaseLotto();
@@ -29,19 +27,18 @@ class User {
         LOTTO.MIN_NUMBER,
         LOTTO.MAX_NUMBER,
         LOTTO.NUMBER_COUNT,
-      ).sort((a, b) => a - b);
+      );
       const lotto = new Lotto(lottoNumber);
       this.#storage.push(lotto);
     }
   }
   printLotto() {
-    Console.print(getLottoString());
+    Console.print(this.getLottoString());
   }
 
   getLottoString() {
-    this.#storage.reduce((stringConsole, lotto) => {
-      let lottoString = lotto.join(',');
-      return stringConsole + `[${lottoString}]\n`;
+    return this.#storage.reduce((stringConsole, eachLotto) => {
+      return stringConsole + `[${eachLotto.getNumbers().join(', ')}]\n`;
     }, '');
   }
 }

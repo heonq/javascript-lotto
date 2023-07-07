@@ -1,5 +1,13 @@
+const User = require('./User');
+
 class App {
-  play() {}
+  constructor() {
+    this.user = new User();
+  }
+
+  play() {
+    this.user.play();
+  }
 }
 
 module.exports = App;
