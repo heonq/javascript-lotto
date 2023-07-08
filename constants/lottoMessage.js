@@ -23,6 +23,7 @@ const ERROR_MESSAGE = Object.freeze({
   NOT_SIX_DIGITS: PREFIX + '6개의 숫자를 입력해주세요.',
   OUT_OF_RANGE: PREFIX + '1에서 45 사이의 숫자를 입력해주세요.',
   DUPLICATED_NUMBER: PREFIX + '중복되지 않은 숫자를 입력해주세요.',
+  DUPLICATED_WITH_MAIN_NUMBER: PREFIX + '당첨번호와 중복되지 않은 숫자를 입력해주세요.',
 });
 
 module.exports = { LOTTO_MESSAGE, ERROR_MESSAGE };
