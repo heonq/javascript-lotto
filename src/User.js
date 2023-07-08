@@ -12,12 +12,9 @@ class User {
   }
 
   play() {
-    Console.print('HI 1');
     this.purchaseLotto();
     this.generateLotto();
-    Console.print('HI IM');
     this.printLotto();
-    Console.print('HI');
     this.getMainNumbers();
   }
 
@@ -30,7 +27,6 @@ class User {
     });
   }
   generateLotto() {
-    Console.print('point');
     for (let i = 0; i < this.quantity; i++) {
       const lottoNumber = Random.pickUniqueNumbersInRange(
         LOTTO.MIN_NUMBER,
