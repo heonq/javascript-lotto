@@ -11,6 +11,7 @@ class User {
     this.purchaseLotto();
     this.generateLotto();
     this.printLotto();
+    this.getMainNumbers();
   }
 
   purchaseLotto() {
@@ -40,6 +41,13 @@ class User {
     return this.#storage.reduce((stringConsole, eachLotto) => {
       return stringConsole + `[${eachLotto.getNumbers().join(', ')}]\n`;
     }, '');
+  }
+  getMainNumbers() {
+    Console.readLine(LOTTO_MESSAGE.INPUT_MAIN_NUMBER, (mainNumbers) => {
+      this.mainNumbers = mainNumbers.split(',');
+      Validator.validateMainNumbers(this.mainNumbers);
+      this.mainNumbers.sort((a, b) => a - b);
+    });
   }
 }
 
