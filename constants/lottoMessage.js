@@ -21,7 +21,6 @@ const ERROR_MESSAGE = Object.freeze({
   NOT_SIX_DIGITS: '6개의 숫자를 입력해주세요.',
   OUT_OF_RANGE: '1에서 45 사이의 숫자를 입력해주세요.',
   DUPLICATED_NUMBER: '중복되지 않은 숫자를 입력해주세요.',
-  MISSING_COMMA: ',를 이용해 숫자를 구분해주세요.',
 });
 
 module.exports = { LOTTO_MESSAGE, ERROR_MESSAGE };
