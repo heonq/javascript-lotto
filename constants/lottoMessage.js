@@ -1,3 +1,5 @@
+const PREFIX = '[ERROR] ';
+
 const LOTTO_MESSAGE = Object.freeze({
   INPUT_AMOUNT: '구입금액을 입력해 주세요.\n',
   PRINT_QUANTITY: '개를 구매했습니다.\n',
@@ -15,12 +17,12 @@ const LOTTO_MESSAGE = Object.freeze({
 });
 
 const ERROR_MESSAGE = Object.freeze({
-  NOT_THOUSAND_UNIT: '1,000원 단위로 금액을 입력해주세요.',
-  LESS_THAN_THOUSAND: '1,000원 이상의 금액을 입력해주세요.',
-  NOT_NUMBER: '숫자를 입력해주세요.',
-  NOT_SIX_DIGITS: '6개의 숫자를 입력해주세요.',
-  OUT_OF_RANGE: '1에서 45 사이의 숫자를 입력해주세요.',
-  DUPLICATED_NUMBER: '중복되지 않은 숫자를 입력해주세요.',
+  NOT_THOUSAND_UNIT: PREFIX + '1,000원 단위로 금액을 입력해주세요.',
+  LESS_THAN_THOUSAND: PREFIX + '1,000원 이상의 금액을 입력해주세요.',
+  NOT_NUMBER: PREFIX + '숫자를 입력해주세요.',
+  NOT_SIX_DIGITS: PREFIX + '6개의 숫자를 입력해주세요.',
+  OUT_OF_RANGE: PREFIX + '1에서 45 사이의 숫자를 입력해주세요.',
+  DUPLICATED_NUMBER: PREFIX + '중복되지 않은 숫자를 입력해주세요.',
 });
 
 module.exports = { LOTTO_MESSAGE, ERROR_MESSAGE };
