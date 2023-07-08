@@ -5,12 +5,19 @@ const Validator = require('../lib/Validator');
 const Lotto = require('./Lotto');
 
 class User {
-  #storage = [];
+  #storage;
+
+  constructor() {
+    this.#storage = [];
+  }
 
   play() {
+    Console.print('HI 1');
     this.purchaseLotto();
     this.generateLotto();
+    Console.print('HI IM');
     this.printLotto();
+    Console.print('HI');
     this.getMainNumbers();
   }
 
@@ -23,6 +30,7 @@ class User {
     });
   }
   generateLotto() {
+    Console.print('point');
     for (let i = 0; i < this.quantity; i++) {
       const lottoNumber = Random.pickUniqueNumbersInRange(
         LOTTO.MIN_NUMBER,
@@ -33,6 +41,7 @@ class User {
       this.#storage.push(lotto);
     }
   }
+
   printLotto() {
     Console.print(this.getLottoString());
   }
@@ -42,11 +51,17 @@ class User {
       return stringConsole + `[${eachLotto.getNumbers().join(', ')}]\n`;
     }, '');
   }
+
   getMainNumbers() {
     Console.readLine(LOTTO_MESSAGE.INPUT_MAIN_NUMBER, (mainNumbers) => {
-      this.mainNumbers = mainNumbers.split(',');
+      this.mainNumbers = mainNumbers.split(',').map(Number);
       Validator.validateMainNumbers(this.mainNumbers);
-      this.mainNumbers.sort((a, b) => a - b);
+    });
+  }
+  getBonusNumber() {
+    Console.readLine(LOTTO_MESSAGE.INPUT_BONUS_NUMBER, (bonusNumber) => {
+      Validator.validateBonusNumber(bonusNumber);
+      this.bonusNumber = Number(bonusNumber);
     });
   }
 }
