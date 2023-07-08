@@ -1,4 +1,4 @@
-const User = require('../src/User.js');
+const App = require('../src/App.js');
 const MissionUtils = require('@woowacourse/mission-utils');
 
 const mockQuestions = (answers) => {
@@ -35,8 +35,8 @@ describe('로또 구매 테스트', () => {
     ]);
     const logs = ['5개를 구매했습니다.'];
     const logSpy = getLogSpy();
-    const user = new User();
-    user.play();
+    const app = new App();
+    app.play();
     logs.forEach((log) => {
       expect(logSpy).toHaveBeenCalledWith(expect.stringContaining(log));
     });
