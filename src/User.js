@@ -1,6 +1,6 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
 const { LOTTO_MESSAGE } = require('../constants/lottoMessage');
-const { LOTTO } = require('../constants/lottoValue');
+const { LOTTO, PRIZE } = require('../constants/lottoValue');
 const Validator = require('../lib/Validator');
 const Lotto = require('./Lotto');
 
@@ -9,6 +9,14 @@ class User {
 
   constructor() {
     this.#storage = [];
+    this.prizeCounter = {
+      firstRank: 0,
+      secondRank: 0,
+      thirdRank: 0,
+      fourthRank: 0,
+      fifthRank: 0,
+    };
+    this.mainNumbers = [];
   }
 
   play() {
@@ -16,6 +24,9 @@ class User {
     this.generateLotto();
     this.printLotto();
     this.getMainNumbers();
+    this.getBonusNumber();
+    this.compareLotto(this.mainNumbers);
+    Console.print(this.prizeCounter);
   }
 
   purchaseLotto() {
@@ -56,9 +67,40 @@ class User {
   }
   getBonusNumber() {
     Console.readLine(LOTTO_MESSAGE.INPUT_BONUS_NUMBER, (bonusNumber) => {
-      Validator.validateBonusNumber(bonusNumber);
+      Validator.validateBonusNumber(bonusNumber, this.mainNumbers);
       this.bonusNumber = Number(bonusNumber);
     });
+  }
+
+  compareLotto(mainNumbers) {
+    this.#storage.forEach((lotto) => {
+      const userNumber = lotto.getNumbers();
+      const counter = LOTTO.NUMBER_COUNT * 2 - new Set([...mainNumbers, ...userNumber]).size;
+      this.updatePrizeCounter(counter, lotto);
+    });
+  }
+
+  updatePrizeCounter(counter, lotto) {
+    if (counter < 3) {
+      return;
+    }
+
+    if (counter === 5) {
+      this.compareBonusNumber(lotto);
+      return;
+    }
+    if (2 < counter) {
+      const rank = PRIZE[counter];
+      this.prizeCounter[rank]++;
+      return;
+    }
+  }
+
+  compareBonusNumber(lotto) {
+    const userNumber = lotto.getNumbers();
+    if (new Set([...userNumber, this.bonusNumber]).size === 6) {
+      this.prizeCounter.secondRank++;
+    }
   }
 }
 

@@ -5,4 +5,11 @@ const LOTTO = Object.freeze({
   NUMBER_COUNT: 6,
 });
 
-module.exports = { LOTTO };
+const PRIZE = {
+  6: 'firstRank',
+  5: 'thirdRank',
+  4: 'fourthRank',
+  3: 'fifthRank',
+};
+
+module.exports = { LOTTO, PRIZE };

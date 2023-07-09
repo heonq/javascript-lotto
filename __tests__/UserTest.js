@@ -25,7 +25,7 @@ const getLogSpy = () => {
 
 describe('로또 구매 테스트', () => {
   test('사용자가 로또를 구매했을 때 수량이 정상적으로 출력되는지 테스트', () => {
-    mockQuestions(['5000']);
+    mockQuestions(['5000', '1, 2, 3, 4, 5, 6', '7']);
     mockRandoms([
       [1, 2, 3, 4, 5, 6],
       [2, 3, 4, 5, 6, 7],
@@ -33,7 +33,7 @@ describe('로또 구매 테스트', () => {
       [1, 2, 3, 4, 5, 6],
       [6, 7, 8, 9, 10, 11],
     ]);
-    const logs = ['5개를 구매했습니다.'];
+    const logs = ['5개를 구매했습니다.', '[1, 2, 3, 4, 5, 6]', '[2, 3, 4, 5, 6, 7]'];
     const logSpy = getLogSpy();
     const app = new App();
     app.play();
