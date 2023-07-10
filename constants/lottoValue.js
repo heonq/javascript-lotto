@@ -13,11 +13,11 @@ const PRIZE_RANK = {
 };
 
 const PRIZE_AMOUNT = {
-  firstRank: '2_000_000_000',
-  secondRank: '30_000_000',
-  thirdRank: '1_500_000',
-  fourthRank: '50_000',
-  fifthRank: '5_000',
+  firstRank: 2_000_000_000,
+  secondRank: 30_000_000,
+  thirdRank: 1_500_000,
+  fourthRank: 50_000,
+  fifthRank: 5_000,
 };
 
 module.exports = { LOTTO, PRIZE_RANK, PRIZE_AMOUNT };
