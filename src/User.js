@@ -26,7 +26,7 @@ class User {
     this.getMainNumbers();
     this.getBonusNumber();
     this.compareLotto(this.mainNumbers);
-    Console.print(this.prizeCounter);
+    this.printResult();
   }
 
   purchaseLotto() {
@@ -50,7 +50,11 @@ class User {
   }
 
   printLotto() {
-    Console.print(this.getLottoString());
+    const lottoString = this.getLottoString();
+    lottoString
+      .split('\n')
+      .map((line) => line.trim())
+      .forEach(Console.print);
   }
 
   getLottoString() {
@@ -101,6 +105,18 @@ class User {
     if (new Set([...userNumber, this.bonusNumber]).size === 6) {
       this.prizeCounter.secondRank++;
     }
+  }
+  printResult() {
+    Console.print(LOTTO_MESSAGE.PRINT_RESULT);
+    this.combineAndPrintMessage('THREE_SAME', 'fifthRank');
+    this.combineAndPrintMessage('FOUR_SAME', 'fourthRank');
+    this.combineAndPrintMessage('FIVE_SAME', 'thirdRank');
+    this.combineAndPrintMessage('FIVE_BONUS_SAME', 'secondRank');
+    this.combineAndPrintMessage('SIX_SAME', 'firstRank');
+  }
+
+  combineAndPrintMessage(matchCounter, rank) {
+    Console.print(LOTTO_MESSAGE[matchCounter] + this.prizeCounter[rank] + LOTTO_MESSAGE.QUANTITY);
   }
 }
 
