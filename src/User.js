@@ -27,6 +27,7 @@ class User {
     this.getBonusNumber();
     this.compareLotto(this.mainNumbers);
     this.printResult();
+    this.printEarningRate();
   }
 
   purchaseLotto() {
@@ -51,10 +52,11 @@ class User {
 
   printLotto() {
     const lottoString = this.getLottoString();
-    lottoString
-      .split('\n')
-      .map((line) => line.trim())
-      .forEach(Console.print);
+    Console.print(lottoString);
+    // lottoString
+    //   .split('\n')
+    //   .map((line) => line.trim())
+    //   .forEach(Console.print);
   }
 
   getLottoString() {
@@ -117,6 +119,19 @@ class User {
 
   combineAndPrintMessage(matchCounter, rank) {
     Console.print(LOTTO_MESSAGE[matchCounter] + this.prizeCounter[rank] + LOTTO_MESSAGE.QUANTITY);
+  }
+
+  printEarningRate() {
+    const earningAmount = this.calcEarningAmount();
+    const earningRate = ((earningAmount / this.amount) * 100).toFixed(1);
+    Console.print(LOTTO_MESSAGE.RATE_OF_RETURN + earningRate + LOTTO_MESSAGE.IS);
+  }
+
+  calcEarningAmount() {
+    return Object.entries(this.prizeCounter).reduce((sumPrize, [prize, counter]) => {
+      let result = PRIZE_AMOUNT[prize] * counter;
+      return sumPrize + result;
+    }, 0);
   }
 }
 
