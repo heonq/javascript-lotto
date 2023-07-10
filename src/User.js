@@ -1,6 +1,6 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
 const { LOTTO_MESSAGE } = require('../constants/lottoMessage');
-const { LOTTO, PRIZE } = require('../constants/lottoValue');
+const { LOTTO, PRIZE_RANK, PRIZE_AMOUNT } = require('../constants/lottoValue');
 const Validator = require('../lib/Validator');
 const Lotto = require('./Lotto');
 
@@ -94,7 +94,7 @@ class User {
       return;
     }
     if (2 < counter) {
-      const rank = PRIZE[counter];
+      const rank = PRIZE_RANK[counter];
       this.prizeCounter[rank]++;
       return;
     }
