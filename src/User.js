@@ -10,6 +10,8 @@ class User {
   #prizeCounter;
   #mainNumbers;
   #bonusNumber;
+  #quantity;
+  #amount;
 
   constructor() {
     this.#storage = [];
@@ -21,7 +23,6 @@ class User {
       fifthRank: 0,
     };
     this.#mainNumbers = [];
-    this.#bonusNumber = 0;
     this.accounting = new Accounting();
   }
 
@@ -31,23 +32,23 @@ class User {
     this.printLotto();
     this.getMainNumbers();
     this.getBonusNumber();
-    this.compareLotto(this.#mainNumbers);
+    this.compareLotto();
     this.printResult();
   }
 
   purchaseLotto() {
     Console.readLine(LOTTO_MESSAGE.INPUT_AMOUNT, this.setAmount.bind(this));
-    Console.print(this.quantity + LOTTO_MESSAGE.PRINT_QUANTITY);
+    Console.print(this.#quantity + LOTTO_MESSAGE.PRINT_QUANTITY);
   }
 
   setAmount(amount) {
     Validator.validatePurchaseAmount(amount);
-    this.amount = amount;
-    this.quantity = this.amount / LOTTO.PRICE;
+    this.#amount = amount;
+    this.#quantity = this.#amount / LOTTO.PRICE;
   }
 
   generateLotto() {
-    for (let i = 0; i < this.quantity; i++) {
+    for (let i = 0; i < this.#quantity; i++) {
       const lottoNumber = Random.pickUniqueNumbersInRange(
         LOTTO.MIN_NUMBER,
         LOTTO.MAX_NUMBER,
@@ -77,10 +78,10 @@ class User {
     });
   }
 
-  compareLotto(mainNumbers) {
+  compareLotto() {
     this.#storage.forEach((lotto) => {
       const userNumber = lotto.getNumbers();
-      const counter = LOTTO.NUMBER_COUNT * 2 - new Set([...mainNumbers, ...userNumber]).size;
+      const counter = LOTTO.NUMBER_COUNT * 2 - new Set([...this.mainNumbers, ...userNumber]).size;
       this.updatePrizeCounter(counter, lotto);
     });
   }
