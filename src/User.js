@@ -4,6 +4,7 @@ const { LOTTO, PRIZE_RANK } = require('../constants/lottoValue');
 const Validator = require('../lib/Validator');
 const Lotto = require('./Lotto');
 const Accounting = require('./Accounting');
+const Input = require('./Input.js');
 
 class User {
   #storage;
@@ -64,24 +65,28 @@ class User {
     }, '');
     Console.print(lottoString);
   }
-
   getMainNumbers() {
-    Console.readLine(LOTTO_MESSAGE.INPUT_MAIN_NUMBER, (mainNumbers) => {
-      this.#mainNumbers = mainNumbers.split(',').map(Number);
-      Validator.validateMainNumbers(this.#mainNumbers);
-    });
+    Input.readMainNumbers(this.handleMainNumbers.bind(this));
   }
+
+  handleMainNumbers(mainNumbers) {
+    this.#mainNumbers = mainNumbers.split(',').map(Number);
+    Validator.validateMainNumbers(this.#mainNumbers);
+  }
+
   getBonusNumber() {
-    Console.readLine(LOTTO_MESSAGE.INPUT_BONUS_NUMBER, (bonusNumber) => {
-      Validator.validateBonusNumber(bonusNumber, this.#mainNumbers);
-      this.#bonusNumber = Number(bonusNumber);
-    });
+    Input.readBonusNumbers(this.handleBonusNumber.bind(this));
+  }
+
+  handleBonusNumber(bonusNumber) {
+    Validator.validateBonusNumber(bonusNumber, this.#mainNumbers);
+    this.#bonusNumber = Number(bonusNumber);
   }
 
   compareLotto() {
     this.#storage.forEach((lotto) => {
       const userNumber = lotto.getNumbers();
-      const counter = LOTTO.NUMBER_COUNT * 2 - new Set([...this.mainNumbers, ...userNumber]).size;
+      const counter = LOTTO.NUMBER_COUNT * 2 - new Set([...this.#mainNumbers, ...userNumber]).size;
       this.updatePrizeCounter(counter, lotto);
     });
   }
@@ -115,7 +120,7 @@ class User {
     this.combineAndPrintMessage('FIVE_SAME', 'thirdRank');
     this.combineAndPrintMessage('FIVE_BONUS_SAME', 'secondRank');
     this.combineAndPrintMessage('SIX_SAME', 'firstRank');
-    this.accounting.printEarningRate(this.amount, this.#prizeCounter);
+    this.accounting.printEarningRate(this.#amount, this.#prizeCounter);
     Console.close();
   }
 
