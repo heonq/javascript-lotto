@@ -53,10 +53,6 @@ class User {
   printLotto() {
     const lottoString = this.getLottoString();
     Console.print(lottoString);
-    // lottoString
-    //   .split('\n')
-    //   .map((line) => line.trim())
-    //   .forEach(Console.print);
   }
 
   getLottoString() {
@@ -115,6 +111,11 @@ class User {
     this.combineAndPrintMessage('FIVE_SAME', 'thirdRank');
     this.combineAndPrintMessage('FIVE_BONUS_SAME', 'secondRank');
     this.combineAndPrintMessage('SIX_SAME', 'firstRank');
+    this.close();
+  }
+
+  close() {
+    Console.close();
   }
 
   combineAndPrintMessage(matchCounter, rank) {
