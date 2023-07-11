@@ -1,22 +1,28 @@
 const { Console, Random } = require('@woowacourse/mission-utils');
 const { LOTTO_MESSAGE } = require('../constants/lottoMessage');
-const { LOTTO, PRIZE_RANK, PRIZE_AMOUNT } = require('../constants/lottoValue');
+const { LOTTO, PRIZE_RANK } = require('../constants/lottoValue');
 const Validator = require('../lib/Validator');
 const Lotto = require('./Lotto');
+const Accounting = require('./Accounting');
 
 class User {
   #storage;
+  #prizeCounter;
+  #mainNumbers;
+  #bonusNumber;
 
   constructor() {
     this.#storage = [];
-    this.prizeCounter = {
+    this.#prizeCounter = {
       firstRank: 0,
       secondRank: 0,
       thirdRank: 0,
       fourthRank: 0,
       fifthRank: 0,
     };
-    this.mainNumbers = [];
+    this.#mainNumbers = [];
+    this.#bonusNumber = 0;
+    this.accounting = new Accounting();
   }
 
   play() {
@@ -25,19 +31,21 @@ class User {
     this.printLotto();
     this.getMainNumbers();
     this.getBonusNumber();
-    this.compareLotto(this.mainNumbers);
+    this.compareLotto(this.#mainNumbers);
     this.printResult();
-    this.printEarningRate();
   }
 
   purchaseLotto() {
-    Console.readLine(LOTTO_MESSAGE.INPUT_AMOUNT, (amount) => {
-      Validator.validatePurchaseAmount(amount);
-      this.amount = amount;
-      this.quantity = this.amount / LOTTO.PRICE;
-      Console.print(this.quantity + LOTTO_MESSAGE.PRINT_QUANTITY);
-    });
+    Console.readLine(LOTTO_MESSAGE.INPUT_AMOUNT, this.setAmount.bind(this));
+    Console.print(this.quantity + LOTTO_MESSAGE.PRINT_QUANTITY);
   }
+
+  setAmount(amount) {
+    Validator.validatePurchaseAmount(amount);
+    this.amount = amount;
+    this.quantity = this.amount / LOTTO.PRICE;
+  }
+
   generateLotto() {
     for (let i = 0; i < this.quantity; i++) {
       const lottoNumber = Random.pickUniqueNumbersInRange(
@@ -45,32 +53,27 @@ class User {
         LOTTO.MAX_NUMBER,
         LOTTO.NUMBER_COUNT,
       );
-      const lotto = new Lotto(lottoNumber);
-      this.#storage.push(lotto);
+      this.#storage.push(new Lotto(lottoNumber));
     }
   }
 
   printLotto() {
-    const lottoString = this.getLottoString();
-    Console.print(lottoString);
-  }
-
-  getLottoString() {
-    return this.#storage.reduce((stringConsole, eachLotto) => {
+    const lottoString = this.#storage.reduce((stringConsole, eachLotto) => {
       return stringConsole + `[${eachLotto.getNumbers().join(', ')}]\n`;
     }, '');
+    Console.print(lottoString);
   }
 
   getMainNumbers() {
     Console.readLine(LOTTO_MESSAGE.INPUT_MAIN_NUMBER, (mainNumbers) => {
-      this.mainNumbers = mainNumbers.split(',').map(Number);
-      Validator.validateMainNumbers(this.mainNumbers);
+      this.#mainNumbers = mainNumbers.split(',').map(Number);
+      Validator.validateMainNumbers(this.#mainNumbers);
     });
   }
   getBonusNumber() {
     Console.readLine(LOTTO_MESSAGE.INPUT_BONUS_NUMBER, (bonusNumber) => {
-      Validator.validateBonusNumber(bonusNumber, this.mainNumbers);
-      this.bonusNumber = Number(bonusNumber);
+      Validator.validateBonusNumber(bonusNumber, this.#mainNumbers);
+      this.#bonusNumber = Number(bonusNumber);
     });
   }
 
@@ -93,15 +96,15 @@ class User {
     }
     if (2 < counter) {
       const rank = PRIZE_RANK[counter];
-      this.prizeCounter[rank]++;
+      this.#prizeCounter[rank]++;
       return;
     }
   }
 
   compareBonusNumber(lotto) {
     const userNumber = lotto.getNumbers();
-    if (new Set([...userNumber, this.bonusNumber]).size === 6) {
-      this.prizeCounter.secondRank++;
+    if (new Set([...userNumber, this.#bonusNumber]).size === 6) {
+      this.#prizeCounter.secondRank++;
     }
   }
   printResult() {
@@ -111,28 +114,12 @@ class User {
     this.combineAndPrintMessage('FIVE_SAME', 'thirdRank');
     this.combineAndPrintMessage('FIVE_BONUS_SAME', 'secondRank');
     this.combineAndPrintMessage('SIX_SAME', 'firstRank');
-    this.close();
-  }
-
-  close() {
+    this.accounting.printEarningRate(this.amount, this.#prizeCounter);
     Console.close();
   }
 
   combineAndPrintMessage(matchCounter, rank) {
-    Console.print(LOTTO_MESSAGE[matchCounter] + this.prizeCounter[rank] + LOTTO_MESSAGE.QUANTITY);
-  }
-
-  printEarningRate() {
-    const earningAmount = this.calcEarningAmount();
-    const earningRate = ((earningAmount / this.amount) * 100).toFixed(1);
-    Console.print(LOTTO_MESSAGE.RATE_OF_RETURN + earningRate + LOTTO_MESSAGE.IS);
-  }
-
-  calcEarningAmount() {
-    return Object.entries(this.prizeCounter).reduce((sumPrize, [prize, counter]) => {
-      let result = PRIZE_AMOUNT[prize] * counter;
-      return sumPrize + result;
-    }, 0);
+    Console.print(LOTTO_MESSAGE[matchCounter] + this.#prizeCounter[rank] + LOTTO_MESSAGE.QUANTITY);
   }
 }
 
