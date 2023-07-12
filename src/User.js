@@ -5,6 +5,7 @@ const Validator = require('../lib/Validator');
 const Lotto = require('./Lotto');
 const Accounting = require('./Accounting');
 const Input = require('./Input.js');
+const Output = require('./Output.js');
 
 class User {
   #storage;
@@ -13,15 +14,16 @@ class User {
   #bonusNumber;
   #quantity;
   #amount;
+  #earningRate;
 
   constructor() {
     this.#storage = [];
     this.#prizeCounter = {
-      firstRank: 0,
-      secondRank: 0,
-      thirdRank: 0,
-      fourthRank: 0,
       fifthRank: 0,
+      fourthRank: 0,
+      thirdRank: 0,
+      secondRank: 0,
+      firstRank: 0,
     };
     this.#mainNumbers = [];
     this.accounting = new Accounting();
@@ -34,7 +36,9 @@ class User {
     this.getMainNumbers();
     this.getBonusNumber();
     this.compareLotto();
-    this.printResult();
+    Output.printResult(this);
+    Output.printEarningRate(this.getEarningRate());
+    Console.close();
   }
 
   purchaseLotto() {
@@ -113,19 +117,13 @@ class User {
       this.#prizeCounter.secondRank++;
     }
   }
-  printResult() {
-    Console.print(LOTTO_MESSAGE.PRINT_RESULT);
-    this.combineAndPrintMessage('THREE_SAME', 'fifthRank');
-    this.combineAndPrintMessage('FOUR_SAME', 'fourthRank');
-    this.combineAndPrintMessage('FIVE_SAME', 'thirdRank');
-    this.combineAndPrintMessage('FIVE_BONUS_SAME', 'secondRank');
-    this.combineAndPrintMessage('SIX_SAME', 'firstRank');
-    this.accounting.printEarningRate(this.#amount, this.#prizeCounter);
-    Console.close();
+
+  getEarningRate() {
+    return this.accounting.getEarningRate(this.#amount, this.#prizeCounter);
   }
 
-  combineAndPrintMessage(matchCounter, rank) {
-    Console.print(LOTTO_MESSAGE[matchCounter] + this.#prizeCounter[rank] + LOTTO_MESSAGE.QUANTITY);
+  getPrizeCounter() {
+    return this.#prizeCounter;
   }
 }
 
