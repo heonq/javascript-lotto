@@ -13,7 +13,7 @@ class Controller {
 
   handlePurchase(amount) {
     Validator.validatePurchase(amount);
-    OutputView.printMessage(amount);
+    OutputView.printPurchase(amount);
   }
 }
 
