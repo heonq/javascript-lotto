@@ -1,5 +1,6 @@
 const InputView = require('./View/InputView');
 const OutputView = require('./View/OutputView');
+const Validator = require('../utils/Validator');
 
 class Controller {
   play() {
@@ -11,6 +12,7 @@ class Controller {
   }
 
   handlePurchase(amount) {
+    Validator.validatePurchase(amount);
     OutputView.printMessage(amount);
   }
 }
