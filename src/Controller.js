@@ -28,11 +28,15 @@ class Controller {
 
   readWinningNumbers() {
     InputView.readWinningNumbers(handleWinningNumbers.bind(this));
+    this.readBonusNumber();
   }
 
   handleWinningNumbers(numbers) {
     Validator.validateLottoNumbers(numbers);
     OutputView.printMessage(numbers);
+  }
+  readBonusNumber() {
+    InputView.readBonusNumber(handleBonusNumber.bind(this));
   }
 }
 
