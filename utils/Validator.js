@@ -1,5 +1,5 @@
 const ERROR_MESSAGE = require('./ErrorMessage');
-const CONSTANTS = require('./Constants');
+const { CONSTANTS } = require('./Constants');
 
 const Validator = {
   validatePurchase(amount) {
