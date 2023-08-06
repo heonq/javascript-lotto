@@ -1,10 +1,17 @@
 const InputView = require('./View/InputView');
 const OutputView = require('./View/OutputView');
 const Validator = require('../utils/Validator');
+const LottoGame = require('./LottoGame');
 
 class Controller {
+  #lottoGame;
+
+  constructor() {
+    this.#lottoGame = new LottoGame();
+  }
+
   play() {
-    this.readPurcahse();
+    this.readPurchase();
   }
 
   readPurchase() {
@@ -14,6 +21,8 @@ class Controller {
   handlePurchase(amount) {
     Validator.validatePurchase(amount);
     OutputView.printPurchase(amount);
+    this.#lottoGame.generateLotto(amount);
+    OutputView.printLotto(this.#lottoGame);
   }
 }
 

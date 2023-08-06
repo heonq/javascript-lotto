@@ -21,6 +21,9 @@ class LottoGame {
       });
     this.#userLotto = numbers.map((number) => new Lotto(number));
   }
+  getNumbersString() {
+    return this.#userLotto.map((lotto) => `[${lotto.getNumbers().join(',')}]`).join('\n');
+  }
 }
 
 module.exports = LottoGame;

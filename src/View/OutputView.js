@@ -10,6 +10,9 @@ const OutputView = {
     this.printMessage(amount);
     this.printMessage(amount / CONSTANTS.lottoPrice + MESSAGE.printPurchase);
   },
+  printLotto(lottoGame) {
+    this.printMessage(lottoGame.getNumbersString());
+  },
 };
 
 module.exports = OutputView;
