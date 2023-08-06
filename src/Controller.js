@@ -48,6 +48,7 @@ class Controller {
   handleBonusNumber(number) {
     Validator.validateBonusNumber(number, this.#winningNumbers);
     this.#bonusNumber = +number;
+    OutputView.printMessage(number);
   }
 }
 
