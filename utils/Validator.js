@@ -9,7 +9,7 @@ const Validator = {
   validateLottoNumbers(numbers) {
     numbers = numbers.split(',').map(Number);
     if (numbers.length !== CONSTANTS.validLength) throw new Error(ERROR_MESSAGE.invalidLength);
-    if (new set([...numbers]).size !== CONSTANTS.validLength)
+    if (new Set([...numbers]).size !== CONSTANTS.validLength)
       throw new Error(ERROR_MESSAGE.duplicated);
     if (numbers.every((number) => CONSTANTS.minNumber <= number && number <= CONSTANTS.maxNumber))
       throw new Error(ERROR_MESSAGE.outOfRange);
