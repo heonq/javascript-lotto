@@ -15,7 +15,7 @@ const Validator = {
   },
   validateBonusNumber(number, winningNumbers) {
     if (winningNumbers.includes(+number)) throw new Error(ERROR_MESSAGE.duplicatedWithWinning);
-    if (!CONSTANTS.minNumber <= +number && +number <= CONSTANTS.maxNumber)
+    if (!(CONSTANTS.minNumber <= +number && +number <= CONSTANTS.maxNumber))
       throw new Error(ERROR_MESSAGE.outOfRange);
   },
 };
