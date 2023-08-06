@@ -29,7 +29,7 @@ class Controller {
   }
 
   readWinningNumbers() {
-    InputView.readWinningNumbers(handleWinningNumbers.bind(this));
+    InputView.readWinningNumbers(this.handleWinningNumbers.bind(this));
     this.readBonusNumber();
   }
 
@@ -39,7 +39,7 @@ class Controller {
     OutputView.printMessage(numbers);
   }
   readBonusNumber() {
-    InputView.readBonusNumber(handleBonusNumber.bind(this));
+    InputView.readBonusNumber(this.handleBonusNumber.bind(this));
   }
   getWinningNumber() {
     return this.#winningNumbers;
