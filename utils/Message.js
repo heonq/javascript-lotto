@@ -1,7 +1,7 @@
 const MESSAGE = Object.freeze({
   askPurchase: '구입금액을 입력해 주세요.',
   printPurchase: '개를 구매했습니다.',
-  askWinningNumber: '당첨 번호를 입력해 주세요.',
+  askWinningNumbers: '당첨 번호를 입력해 주세요.',
   askBonusNumber: '보너스 번호를 입력해 주세요.',
   winningResult: '당첨 통계\n---',
   matchThree: '3개 일치 (5,000원) - ',
