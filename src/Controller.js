@@ -35,6 +35,7 @@ class Controller {
 
   handleWinningNumbers(numbers) {
     this.#winningNumbers = numbers.split(',').map(Number);
+    console.log(this.#winningNumbers);
     Validator.validateLottoNumbers(this.#winningNumbers);
     OutputView.printMessage(numbers);
   }
@@ -53,6 +54,7 @@ class Controller {
   }
   handleDraw() {
     this.#lottoGame.handlePrize(this.#winningNumbers, this.#bonusNumber);
+    OutputView.printResult(this.#lottoGame);
   }
 }
 

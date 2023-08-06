@@ -13,6 +13,12 @@ const OutputView = {
   printLotto(lottoGame) {
     this.printMessage(lottoGame.getNumbersString());
   },
+  printResult(lottoGame) {
+    this.printMessage(MESSAGE.winningResult);
+    this.printMessage(lottoGame.getResult());
+    this.printMessage(MESSAGE.earningRate + lottoGame.getEarningRate() + MESSAGE.is);
+    Console.close();
+  },
 };
 
 module.exports = OutputView;

@@ -1,6 +1,7 @@
 const Lotto = require('./Lotto');
 const { Random } = require('@woowacourse/mission-utils');
-const { CONSTANTS, LOTTO_PRIZE } = require('../utils/Constants');
+const { CONSTANTS, LOTTO_PRIZE, PRIZE_AMOUNT } = require('../utils/Constants');
+const MESSAGE = require('../utils/Message');
 
 class LottoGame {
   #userLotto;
@@ -19,7 +20,7 @@ class LottoGame {
 
   generateLotto(amount) {
     const numbers = Array(amount / CONSTANTS.lottoPrice)
-      .fill('')
+      .fill(' ')
       .map(() => {
         return Random.pickUniqueNumbersInRange(
           CONSTANTS.minNumber,
@@ -35,7 +36,7 @@ class LottoGame {
   handlePrize(winningNumbers, bonusNumber) {
     this.#userLotto.forEach((lotto) => {
       const matchCount = lotto.drawWinningNumbers(winningNumbers);
-      if (matchCount >= CONSTANTS.prizeMinimumCount) return;
+      if (matchCount < CONSTANTS.prizeMinimumCount) return;
       if (matchCount !== CONSTANTS.checkBonusCount)
         return (this.#prizeCount[LOTTO_PRIZE[matchCount]] += 1);
       this.handleBonus(lotto, bonusNumber);
@@ -44,6 +45,23 @@ class LottoGame {
   handleBonus(lotto, bonusNumber) {
     if (lotto.drawBonusNumber(bonusNumber)) return (this.#prizeCount.secondPrize += 1);
     this.#prizeCount.thirdPrize += 1;
+  }
+
+  getResult() {
+    return Object.entries(this.#prizeCount)
+      .map(([prize, count]) => MESSAGE[prize] + count + MESSAGE.quantity)
+      .join('\n');
+  }
+  getEarningAmount() {
+    return Object.entries(this.#prizeCount).reduce(
+      (acc, [prize, count]) => PRIZE_AMOUNT[prize] * count + acc,
+      0,
+    );
+  }
+  getEarningRate() {
+    return (
+      (this.getEarningAmount() / (this.#userLotto.length * CONSTANTS.lottoPrice)) * (100).toFixed(1)
+    );
   }
 }
 
