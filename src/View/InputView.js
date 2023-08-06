@@ -8,6 +8,9 @@ const InputView = {
   readWinningNumbers(handleWinningNumbers) {
     Console.readLine(MESSAGE.askWinningNumbers, handleWinningNumbers);
   },
+  readBonusNumber(handleBonusNumber) {
+    Console.readLine(MESSAGE.askBonusNumber, handleBonusNumber);
+  },
 };
 
 module.exports = InputView;
