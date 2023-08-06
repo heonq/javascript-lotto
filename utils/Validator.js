@@ -13,8 +13,7 @@ const Validator = {
     if (!numbers.every((number) => CONSTANTS.minNumber <= number && number <= CONSTANTS.maxNumber))
       throw new Error(ERROR_MESSAGE.outOfRange);
   },
-  validateBonusNumber(number, lottoGame) {
-    const winningNumbers = lottoGame.getWinningNumbers();
+  validateBonusNumber(number, winningNumbers) {
     if (winningNumbers.includes(+number)) throw new Error(ERROR_MESSAGE.duplicatedWithWinning);
     if (!CONSTANTS.minNumber <= +number && +number <= CONSTANTS.maxNumber)
       throw new Error(ERROR_MESSAGE.outOfRange);
