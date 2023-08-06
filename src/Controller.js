@@ -32,6 +32,7 @@ class Controller {
 
   handleWinningNumbers(numbers) {
     Validator.validateLottoNumbers(numbers);
+    OutputView.printMessage(numbers);
   }
 }
 
