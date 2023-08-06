@@ -52,7 +52,7 @@ class Controller {
     this.handleDraw();
   }
   handleDraw() {
-    this.#lottoGame.handlePrize(this.#winningNumbers);
+    this.#lottoGame.handlePrize(this.#winningNumbers, this.#bonusNumber);
   }
 }
 

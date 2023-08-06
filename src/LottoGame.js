@@ -32,13 +32,18 @@ class LottoGame {
   getNumbersString() {
     return this.#userLotto.map((lotto) => `[${lotto.getNumbers().join(',')}]`).join('\n');
   }
-  handlePrize(winningNumbers) {
+  handlePrize(winningNumbers, bonusNumber) {
     this.#userLotto.forEach((lotto) => {
       const matchCount = lotto.drawWinningNumbers(winningNumbers);
       if (matchCount >= CONSTANTS.prizeMinimumCount) return;
       if (matchCount !== CONSTANTS.checkBonusCount)
         return (this.#prizeCount[LOTTO_PRIZE[matchCount]] += 1);
+      this.handleBonus(lotto, bonusNumber);
     });
+  }
+  handleBonus(lotto, bonusNumber) {
+    if (lotto.drawBonusNumber(bonusNumber)) return (this.#prizeCount.secondPrize += 1);
+    this.#prizeCount.thirdPrize += 1;
   }
 }
 

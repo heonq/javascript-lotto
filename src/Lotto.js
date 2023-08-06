@@ -19,6 +19,9 @@ class Lotto {
   drawWinningNumbers(winningNumbers) {
     return this.#numbers.filter((number) => winningNumbers.includes(number)).length;
   }
+  drawBonusNumber(bonusNumber) {
+    return this.#numbers.includes(bonusNumber);
+  }
 }
 
 module.exports = Lotto;
