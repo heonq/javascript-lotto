@@ -6,6 +6,7 @@ const LottoGame = require('./LottoGame');
 class Controller {
   #lottoGame;
   #winningNumbers;
+  #bonusNumber;
 
   constructor() {
     this.#lottoGame = new LottoGame();
@@ -33,9 +34,9 @@ class Controller {
   }
 
   handleWinningNumbers(numbers) {
-    Validator.validateLottoNumbers(numbers);
-    OutputView.printMessage(numbers);
     this.#winningNumbers = numbers.split(',').map(Number);
+    Validator.validateLottoNumbers(this.#winningNumbers);
+    OutputView.printMessage(numbers);
   }
   readBonusNumber() {
     InputView.readBonusNumber(handleBonusNumber.bind(this));
@@ -45,7 +46,8 @@ class Controller {
   }
 
   handleBonusNumber(number) {
-    Validator;
+    Validator.validateBonusNumber(number, this.#lottoGame);
+    this.#bonusNumber = +number;
   }
 }
 
