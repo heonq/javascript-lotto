@@ -16,13 +16,23 @@ class Controller {
 
   readPurchase() {
     InputView.readPurchase(this.handlePurchase.bind(this));
+    OutputView.printLotto(this.#lottoGame);
+    this.readWinningNumbers();
   }
 
   handlePurchase(amount) {
     Validator.validatePurchase(amount);
     OutputView.printPurchase(amount);
     this.#lottoGame.generateLotto(amount);
-    OutputView.printLotto(this.#lottoGame);
+  }
+
+  readWinningNumbers() {
+    InputView.readWinningNumbers(handleWinningNumbers.bind(this));
+  }
+
+  handleWinningNumbers(numbers) {
+    numbers = numbers.split(',').map(Number);
+    Validator.validateLottoNumbers(numbers);
   }
 }
 
