@@ -6,7 +6,7 @@ const Validator = {
     if (+amount < 1000) throw new Error(ERROR_MESSAGE.lessThanThousand);
     if (+amount % 1000 !== 0) throw new Error(ERROR_MESSAGE.thousandUnit);
   },
-  validateLottoNumber(numbers) {
+  validateLottoNumbers(numbers) {
     if (numbers.length !== CONSTANTS.validLength) throw new Error(ERROR_MESSAGE.invalidLength);
     if (new set([...numbers]).size !== CONSTANTS.validLength)
       throw new Error(ERROR_MESSAGE.duplicated);
