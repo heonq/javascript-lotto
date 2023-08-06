@@ -31,7 +31,7 @@ class LottoGame {
     this.#userLotto = numbers.map((number) => new Lotto(number));
   }
   getNumbersString() {
-    return this.#userLotto.map((lotto) => `[${lotto.getNumbers().join(',')}]`).join('\n');
+    return this.#userLotto.map((lotto) => `[${lotto.getNumbers().join(', ')}]`).join('\n');
   }
   handlePrize(winningNumbers, bonusNumber) {
     this.#userLotto.forEach((lotto) => {
