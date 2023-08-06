@@ -31,7 +31,6 @@ class Controller {
   }
 
   handleWinningNumbers(numbers) {
-    numbers = numbers.split(',').map(Number);
     Validator.validateLottoNumbers(numbers);
   }
 }
