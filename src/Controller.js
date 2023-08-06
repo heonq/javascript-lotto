@@ -49,6 +49,10 @@ class Controller {
     Validator.validateBonusNumber(number, this.#winningNumbers);
     this.#bonusNumber = +number;
     OutputView.printMessage(number);
+    this.handleDraw();
+  }
+  handleDraw() {
+    this.#lottoGame.handlePrize(this.#winningNumbers);
   }
 }
 

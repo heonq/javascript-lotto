@@ -9,12 +9,15 @@ class Lotto {
   }
 
   validate(numbers) {
-    Validator.validateLottoNumber(numbers);
+    Validator.validateLottoNumbers(numbers);
   }
 
   // TODO: 추가 기능 구현
   getNumbers() {
     return this.#numbers;
+  }
+  drawWinningNumbers(winningNumbers) {
+    return this.#numbers.filter((number) => winningNumbers.includes(number)).length;
   }
 }
 
