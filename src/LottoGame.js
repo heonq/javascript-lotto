@@ -59,9 +59,10 @@ class LottoGame {
     );
   }
   getEarningRate() {
-    return (
-      (this.getEarningAmount() / (this.#userLotto.length * CONSTANTS.lottoPrice)) * (100).toFixed(1)
-    );
+    const earningRate =
+      (this.getEarningAmount() / (this.#userLotto.length * CONSTANTS.lottoPrice)) *
+      (100).toFixed(1);
+    return MESSAGE.earningRate + earningRate + MESSAGE.is;
   }
 }
 
