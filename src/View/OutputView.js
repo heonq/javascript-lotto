@@ -15,8 +15,7 @@ const OutputView = {
   },
   printResult(lottoGame) {
     this.printMessage(MESSAGE.winningResult);
-    this.printMessage(lottoGame.getResult());
-    this.printMessage(lottoGame.getEarningRate());
+    this.printMessage(lottoGame.getStatistics());
     Console.close();
   },
 };

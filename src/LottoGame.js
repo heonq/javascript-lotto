@@ -47,6 +47,10 @@ class LottoGame {
     this.#prizeCount.thirdPrize += 1;
   }
 
+  getStatistics() {
+    return `${this.getResult()}\n${this.getEarningRate()}`;
+  }
+
   getResult() {
     return Object.entries(this.#prizeCount)
       .map(([prize, count]) => MESSAGE[prize] + count + MESSAGE.quantity)
