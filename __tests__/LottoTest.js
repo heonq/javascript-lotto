@@ -26,4 +26,13 @@ describe('로또 클래스 테스트', () => {
       new Lotto([1, 2, 3, 4, 5, 'a']);
     }).toThrow(ERROR_MESSAGE.isNaN);
   });
+  test.each([
+    [[1, 2, 3, 4, 5, 6], 6],
+    [[1, 2, 3, 4, 5, 7], 5],
+    [[1, 2, 3, 4, 7, 8], 4],
+    [[1, 2, 3, 7, 8, 9], 3],
+  ])('사용자의 로또 번호와 당첨 번호 비교 테스트', (userNumbers, matchCount) => {
+    const winningNumbers = [1, 2, 3, 4, 5, 6];
+    expect(new Lotto(userNumbers).drawWinningNumbers(winningNumbers)).toEqual(matchCount);
+  });
 });
