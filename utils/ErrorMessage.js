@@ -7,6 +7,7 @@ const ERROR_MESSAGE = Object.freeze({
   duplicated: `${PREFIX}서로 중복되지 않은 숫자를 입력해 주세요.`,
   outOfRange: `${PREFIX}1부터 45사이의 숫자를 입력해 주세요.`,
   duplicatedWithWinning: `${PREFIX}당첨 번호와 중복되지 않은 숫자를 입력해 주세요.`,
+  isNaN: `${PREFIX}숫자 값을 입력해주세요.`,
 });
 
 module.exports = ERROR_MESSAGE;
