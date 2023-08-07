@@ -3,8 +3,8 @@ const { CONSTANTS } = require('./Constants');
 
 const Validator = {
   validatePurchase(amount) {
-    if (+amount < 1000) throw new Error(ERROR_MESSAGE.lessThanThousand);
-    if (+amount % 1000 !== 0) throw new Error(ERROR_MESSAGE.thousandUnit);
+    if (+amount < CONSTANTS.lottoPrice) throw new Error(ERROR_MESSAGE.lessThanThousand);
+    if (+amount % CONSTANTS.lottoPrice !== 0) throw new Error(ERROR_MESSAGE.thousandUnit);
   },
   validateLottoNumbers(numbers) {
     if (numbers.some((number) => isNaN(number))) throw new Error(ERROR_MESSAGE.isNaN);
