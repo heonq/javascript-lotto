@@ -35,4 +35,11 @@ describe('로또 클래스 테스트', () => {
     const winningNumbers = [1, 2, 3, 4, 5, 6];
     expect(new Lotto(userNumbers).drawWinningNumbers(winningNumbers)).toEqual(matchCount);
   });
+  test.each([
+    [[1, 2, 3, 4, 5, 6], true],
+    [[1, 2, 3, 4, 5, 7], false],
+  ])('사용자의 로또 번호와 보너스 번호 비교 테스트', (userNumbers, matchBoolean) => {
+    const bonusNumber = 6;
+    expect(new Lotto(userNumbers).drawBonusNumber(bonusNumber)).toEqual(matchBoolean);
+  });
 });
