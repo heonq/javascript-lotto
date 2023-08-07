@@ -15,6 +15,7 @@ const Validator = {
       throw new Error(ERROR_MESSAGE.outOfRange);
   },
   validateBonusNumber(number, winningNumbers) {
+    if (typeof number !== 'number') throw new Error(ERROR_MESSAGE.isNaN);
     if (winningNumbers.includes(+number)) throw new Error(ERROR_MESSAGE.duplicatedWithWinning);
     if (!(CONSTANTS.minNumber <= +number && +number <= CONSTANTS.maxNumber))
       throw new Error(ERROR_MESSAGE.outOfRange);
