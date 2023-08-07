@@ -7,7 +7,7 @@ const Validator = {
     if (+amount % CONSTANTS.lottoPrice !== 0) throw new Error(ERROR_MESSAGE.thousandUnit);
   },
   validateLottoNumbers(numbers) {
-    if (numbers.some((number) => typeof number !== 'number')) throw new Error(ERROR_MESSAGE.isNaN);
+    if (numbers.some((number) => Number.isNaN(+number))) throw new Error(ERROR_MESSAGE.isNaN);
     if (numbers.length !== CONSTANTS.validLength) throw new Error(ERROR_MESSAGE.invalidLength);
     if (new Set([...numbers]).size !== CONSTANTS.validLength)
       throw new Error(ERROR_MESSAGE.duplicated);
@@ -15,7 +15,7 @@ const Validator = {
       throw new Error(ERROR_MESSAGE.outOfRange);
   },
   validateBonusNumber(number, winningNumbers) {
-    if (typeof number !== 'number') throw new Error(ERROR_MESSAGE.isNaN);
+    if (Number.isNaN(number)) throw new Error(ERROR_MESSAGE.isNaN);
     if (winningNumbers.includes(+number)) throw new Error(ERROR_MESSAGE.duplicatedWithWinning);
     if (!(CONSTANTS.minNumber <= +number && +number <= CONSTANTS.maxNumber))
       throw new Error(ERROR_MESSAGE.outOfRange);
